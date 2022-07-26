@@ -5,6 +5,8 @@ import com.tgt.upcurve.OrderAPI.service.OrderService;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("order_api/v1")
 public class OrderController {
@@ -21,16 +23,15 @@ public class OrderController {
     }
 
     @GetMapping("/fetch_order_by_customer_id/{customer_id}")
-    public void fetchOrderByCustomer(@Validated @PathVariable("customer_id") Integer customerId) {
-
-
-
+    public List<Order> fetchOrderByCustomerId(@Validated @PathVariable("customer_id") Integer customerId) {
+        return orderService.fetchOrderByCustomerId(customerId);
     }
 
     @PostMapping
-    public void saveOrder() {
-
+    public Order saveOrder(@Validated @RequestBody Order order) {
+        return orderService.saveOrder(order);
     }
+
 
     @DeleteMapping("/order_id")
     public void deleteOrder(@Validated @PathVariable("order_id") Integer orderId) {

@@ -5,6 +5,8 @@ import com.tgt.upcurve.OrderAPI.repository.OrderItemsRepository;
 import com.tgt.upcurve.OrderAPI.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class OrderService {
 
@@ -18,6 +20,19 @@ public class OrderService {
     }
 
     public Order fetchOrderById(Integer orderId) {
-        return orderRepository.getById(orderId);
+        return orderRepository.findByOrderId(orderId);
+    }
+
+    public List<Order> fetchOrderByCustomerId(Integer customerId) {
+        return orderRepository.findAllByCustomerId(customerId);
+    }
+
+    public Order saveOrder(Order order) {
+        Order savedOrder = null;
+        Order existingOrder = orderRepository.findByOrderIdAndCustomerId(order.getOrderId(), order.getCustomerId());
+        if(null == existingOrder){
+            savedOrder = orderRepository.save(order);
+        }
+        return savedOrder;
     }
 }
