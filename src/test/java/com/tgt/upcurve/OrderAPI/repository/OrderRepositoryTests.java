@@ -11,6 +11,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.List;
+
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = OrderApiApplication.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
@@ -33,5 +35,15 @@ public class OrderRepositoryTests {
         Order savedOrder = orderRepository.save(order);
         Assertions.assertNotNull(savedOrder.getId());
     }
+
+    @Test
+    public void testFetchOrderByCustomerId() throws Exception{
+        Order order = JsonUtility.getOrderRequest(ORDER_JSON_FILE_PATH);
+        Order savedOrder = orderRepository.save(order);
+        List<Order> fetchedOrdersByCustomerId = orderRepository.findAllByCustomerId(order.getCustomerId());
+        assert fetchedOrdersByCustomerId.size() > 0;
+    }
+
+
 
 }
