@@ -12,8 +12,9 @@ public class OrderService {
     private final OrderItemsRepository orderItemsRepository;
 
     public OrderService(OrderRepository orderRepository, OrderItemsRepository orderItemsRepository) {
-        this.orderItemsRepository = orderItemsRepository;
         this.orderRepository = orderRepository;
+        this.orderItemsRepository = orderItemsRepository;
+
     }
 
     public Order fetchOrderById(Integer orderId) {
