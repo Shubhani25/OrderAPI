@@ -19,8 +19,8 @@ public class OrderService {
 
     }
 
-    public Order fetchOrderById(Integer orderId) {
-        return orderRepository.findByOrderId(orderId);
+    public Order fetchOrderByCustomerIdAndOrderId(Integer customerId, Integer orderId) {
+        return orderRepository.findOrderByCustomerIdAndOrderId(customerId, orderId);
     }
 
     public List<Order> fetchOrderByCustomerId(Integer customerId) {
@@ -29,12 +29,17 @@ public class OrderService {
 
     public Order saveOrder(Order order) {
         Order savedOrder = null;
-        Order existingOrder = orderRepository.findByOrderIdAndCustomerId(order.getOrderId(), order.getCustomerId());
+        Order existingOrder = orderRepository.findOrderByCustomerIdAndOrderId(order.getCustomerId(), order.getOrderId());
         if(null == existingOrder){
             savedOrder = orderRepository.save(order);
         }
         return savedOrder;
     }
 
-
+    public void deleteOrder(Integer customerId, Integer orderId) {
+        Order existingOrder = orderRepository.findOrderByCustomerIdAndOrderId(customerId, orderId);
+        if(null != existingOrder){
+            orderRepository.delete(existingOrder);
+        }
+    }
 }

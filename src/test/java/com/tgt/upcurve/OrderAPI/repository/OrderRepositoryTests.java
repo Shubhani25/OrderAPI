@@ -30,6 +30,14 @@ public class OrderRepositoryTests {
     }
 
     @Test
+    public void testFindByCustomerIdAndOrderId() throws Exception {
+        Order order = JsonUtility.getOrderRequest(ORDER_JSON_FILE_PATH);
+        Order savedOrder = orderRepository.save(order);
+        Order fetchedOrder = orderRepository.findOrderByCustomerIdAndOrderId(20, 200);
+        assert fetchedOrder != null;
+    }
+
+    @Test
     public void testSaveOrder() throws Exception {
         Order order = JsonUtility.getOrderRequest(ORDER_JSON_FILE_PATH);
         Order savedOrder = orderRepository.save(order);
@@ -43,6 +51,18 @@ public class OrderRepositoryTests {
         List<Order> fetchedOrdersByCustomerId = orderRepository.findAllByCustomerId(order.getCustomerId());
         assert fetchedOrdersByCustomerId.size() > 0;
     }
+
+    @Test
+    public  void testDeleteOrder() throws Exception{
+        Order order = JsonUtility.getOrderRequest(ORDER_JSON_FILE_PATH);
+        Order savedOrder = orderRepository.save(order);
+        Order fetchedOrder = orderRepository.findOrderByCustomerIdAndOrderId(20,200);
+        assert fetchedOrder != null;
+        orderRepository.delete(savedOrder);
+        Order fetchedOrder1 = orderRepository.findOrderByCustomerIdAndOrderId(20,200);
+        assert fetchedOrder1 == null;
+    }
+
 
 
 
