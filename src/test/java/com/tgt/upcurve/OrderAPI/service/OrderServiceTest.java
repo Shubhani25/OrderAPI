@@ -10,6 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.List;
+
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = OrderApiApplication.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
@@ -27,4 +29,24 @@ public class OrderServiceTest {
         Order existingOrder = orderService.fetchOrderByCustomerIdAndOrderId(20, 200);
         assert existingOrder != null;
     }
+
+    @Test
+    public void testFindOrderByCustomerId() throws Exception{
+        Order order = JsonUtility.getOrderRequest(ORDER_JSON_FILE_PATH);
+        Order savedOrder = orderService.saveOrder(order);
+        List<Order> existingOrder = orderService.fetchOrderByCustomerId(20);
+        assert existingOrder.size() > 0;
+    }
+
+    @Test
+    public void testDeleteOrder() throws Exception{
+        Order order = JsonUtility.getOrderRequest(ORDER_JSON_FILE_PATH);
+        Order savedOrder = orderService.saveOrder(order);
+        Order fetchedOrder = orderService.fetchOrderByCustomerIdAndOrderId(20,200);
+        assert fetchedOrder != null;
+        orderService.deleteOrder(20,200);
+        Order fetchedOrder1 = orderService.fetchOrderByCustomerIdAndOrderId(20,200);
+        assert fetchedOrder1 == null;
+    }
+
 }
