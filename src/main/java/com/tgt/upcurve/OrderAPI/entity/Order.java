@@ -35,6 +35,12 @@ public class Order {
     @Column(name="payment_status")
     private String paymentStatus;
 
+    @Column(name = "customer_email")
+    private String customerEmail;
+
+    @Column(name = "customer_mobile")
+    private String customerMobile;
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @JoinColumn(name = "order_id", nullable = false)
     private List<OrderItems> orderItems = new ArrayList<>();

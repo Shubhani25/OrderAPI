@@ -27,4 +27,7 @@ public class OrderItems {
     @Column(name="item_description")
     private String itemDescription;
 
+    @Column(name = "item_quantity")
+    private Integer itemQuantity;
+
 }
