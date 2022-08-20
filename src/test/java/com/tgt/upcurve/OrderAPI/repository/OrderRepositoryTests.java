@@ -17,10 +17,12 @@ import java.util.List;
 @SpringBootTest(classes = OrderApiApplication.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 public class OrderRepositoryTests {
+
     @Autowired
     OrderRepository orderRepository;
 
     private static final String ORDER_JSON_FILE_PATH = "/orderData.json";
+
     @Test
     public void testFindByOrderId() throws Exception {
         Order order = JsonUtility.getOrderRequest(ORDER_JSON_FILE_PATH);

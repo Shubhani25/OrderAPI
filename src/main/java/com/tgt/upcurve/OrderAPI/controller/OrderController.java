@@ -20,7 +20,6 @@ public class OrderController {
     @GetMapping("/fetch_order_by_id/{customer_id}/{order_id}")
     public Order fetchOrderByCustomerIdAndOrderId(@Validated @PathVariable("customer_id") Integer customerId, @Validated @PathVariable("order_id") Integer orderId) {
         return orderService.fetchOrderByCustomerIdAndOrderId(customerId, orderId);
-
     }
 
     @GetMapping("/fetch_order_by_customer_id/{customer_id}")
@@ -38,7 +37,4 @@ public class OrderController {
     public void deleteOrder(@Validated @PathVariable("customer_id") Integer customerId, @Validated @PathVariable("order_id") Integer orderId) {
         orderService.deleteOrder(customerId, orderId);
     }
-
-
-
 }
