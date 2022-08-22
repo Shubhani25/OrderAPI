@@ -32,9 +32,9 @@ public class OrderControllerTest {
     @Autowired
     MockMvc mockMvc;
 
-    private static final String URI_FETCH_CUSTOMER_ID_ORDER_ID = "/order_api/v1/fetch_order_by_id/{customer_id}/{order_id}";
+    private static final String URI_FETCH_CUSTOMER_ID_ORDER_ID = "/order_api/v1/fetch_order_by_id/customer_id/{customer_id}/order_id/{order_id}";
     private static final String URI_FETCH_CUSTOMER_ID = "/order_api/v1/fetch_order_by_customer_id/{customer_id}";
-    private static final String URI_DELETE_CUSTOMER_ID_ORDER_ID = "/order_api/v1/{customer_id}/{order_id}";
+    private static final String URI_DELETE_CUSTOMER_ID_ORDER_ID = "/order_api/v1//customer_id/{customer_id}/order_id/{order_id}";
     private static final String URI_SAVE = "/order_api/v1/";
     private static final String ORDER_JSON_FILE_PATH = "/orderData.json";
 

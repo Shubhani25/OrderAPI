@@ -16,7 +16,6 @@ public class OrderService {
     public OrderService(OrderRepository orderRepository, OrderItemsRepository orderItemsRepository) {
         this.orderRepository = orderRepository;
         this.orderItemsRepository = orderItemsRepository;
-
     }
 
     public Order fetchOrderByCustomerIdAndOrderId(Integer customerId, Integer orderId) {
@@ -42,6 +41,5 @@ public class OrderService {
             orderRepository.delete(existingOrder);
         }
     }
-
 
 }
