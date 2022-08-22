@@ -2,6 +2,7 @@ package com.tgt.upcurve.OrderAPI.service;
 
 import com.tgt.upcurve.OrderAPI.OrderApiApplication;
 import com.tgt.upcurve.OrderAPI.entity.Order;
+import com.tgt.upcurve.OrderAPI.response.OrderResponse;
 import com.tgt.upcurve.OrderAPI.utility.JsonUtility;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,27 +26,27 @@ public class OrderServiceTest {
     @Test
     public void testFindByCustomerIdAndOrderId() throws Exception {
         Order order = JsonUtility.getOrderRequest(ORDER_JSON_FILE_PATH);
-        Order savedOrder = orderService.saveOrder(order);
-        Order existingOrder = orderService.fetchOrderByCustomerIdAndOrderId(20, 200);
+        OrderResponse savedOrder = orderService.saveOrder(order);
+        OrderResponse existingOrder = orderService.fetchOrderByCustomerIdAndOrderId(20, 200);
         assert existingOrder != null;
     }
 
     @Test
     public void testFindOrderByCustomerId() throws Exception{
         Order order = JsonUtility.getOrderRequest(ORDER_JSON_FILE_PATH);
-        Order savedOrder = orderService.saveOrder(order);
-        List<Order> existingOrder = orderService.fetchOrderByCustomerId(20);
+        OrderResponse savedOrder = orderService.saveOrder(order);
+        List<OrderResponse> existingOrder = orderService.fetchOrderByCustomerId(20);
         assert existingOrder.size() > 0;
     }
 
     @Test
     public void testDeleteOrder() throws Exception{
         Order order = JsonUtility.getOrderRequest(ORDER_JSON_FILE_PATH);
-        Order savedOrder = orderService.saveOrder(order);
-        Order fetchedOrder = orderService.fetchOrderByCustomerIdAndOrderId(20,200);
+        OrderResponse savedOrder = orderService.saveOrder(order);
+        OrderResponse fetchedOrder = orderService.fetchOrderByCustomerIdAndOrderId(20,200);
         assert fetchedOrder != null;
         orderService.deleteOrder(20,200);
-        Order fetchedOrder1 = orderService.fetchOrderByCustomerIdAndOrderId(20,200);
+        OrderResponse fetchedOrder1 = orderService.fetchOrderByCustomerIdAndOrderId(20,200);
         assert fetchedOrder1 == null;
     }
 
