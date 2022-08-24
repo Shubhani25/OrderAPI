@@ -2,6 +2,7 @@ package com.tgt.upcurve.OrderAPI.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.tgt.upcurve.OrderAPI.entity.Order;
+import com.tgt.upcurve.OrderAPI.response.OrderResponse;
 import com.tgt.upcurve.OrderAPI.utility.JsonUtility;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -53,8 +54,10 @@ public class OrderControllerTest {
                 .andReturn();
         String fetchedResponse = responseFetch.getResponse().getContentAsString();
 
-        Order savedOrder = JsonUtility.readValue(savedResponse, Order.class);
-        Order fetchedOrder = JsonUtility.readValue(fetchedResponse, Order.class);
+        //Order savedOrder = JsonUtility.readValue(savedResponse, Order.class);
+        OrderResponse savedOrder = JsonUtility.readValue(savedResponse, OrderResponse.class);
+        //Order fetchedOrder = JsonUtility.readValue(fetchedResponse, Order.class);
+        OrderResponse fetchedOrder = JsonUtility.readValue(fetchedResponse, OrderResponse.class);
         Assertions.assertEquals(savedOrder.getOrderId(), fetchedOrder.getOrderId());
         Assertions.assertEquals(savedOrder.getCustomerId(), fetchedOrder.getCustomerId());
         Assertions.assertEquals(savedOrder.getStoreId(), fetchedOrder.getStoreId());
@@ -76,8 +79,12 @@ public class OrderControllerTest {
                 .andExpect(status().is2xxSuccessful())
                 .andReturn();
         String fetchedResponse = responseFetch.getResponse().getContentAsString();
-        Order savedOrder = JsonUtility.readValue(savedResponse, Order.class);
-        List<Order> fetchedOrder =JsonUtility.readValue(fetchedResponse, new TypeReference<List<Order>>() {
+        //Order savedOrder = JsonUtility.readValue(savedResponse, Order.class);
+        //List<Order> fetchedOrder =JsonUtility.readValue(fetchedResponse, new TypeReference<List<Order>>() {
+        //});
+
+        OrderResponse savedOrder = JsonUtility.readValue(savedResponse, OrderResponse.class);
+        List<OrderResponse> fetchedOrder =JsonUtility.readValue(fetchedResponse, new TypeReference<List<OrderResponse>>() {
         });
 
         Assertions.assertEquals(savedOrder.getOrderId(), fetchedOrder.get(0).getOrderId());
@@ -102,7 +109,8 @@ public class OrderControllerTest {
                 .andExpect(status().is2xxSuccessful())
                 .andReturn();
         String fetchedResponse = responseFetch.getResponse().getContentAsString();
-        Order fetchedOrder = JsonUtility.readValue(fetchedResponse, Order.class);
+        //Order fetchedOrder = JsonUtility.readValue(fetchedResponse, Order.class);
+        OrderResponse fetchedOrder = JsonUtility.readValue(fetchedResponse, OrderResponse.class);
         assert fetchedOrder != null;
 
         MvcResult responseDelete = mockMvc.perform(delete(URI_DELETE_CUSTOMER_ID_ORDER_ID, 20, 200)
