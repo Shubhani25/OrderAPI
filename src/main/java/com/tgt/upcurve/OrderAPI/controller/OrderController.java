@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("order_api/v1")
 public class OrderController {
@@ -30,10 +31,8 @@ public class OrderController {
 
     @PostMapping
     public OrderResponse saveOrder(@Validated @RequestBody Order order) {
-
         return orderService.saveOrder(order);
     }
-
 
     @DeleteMapping("/customer_id/{customer_id}/order_id/{order_id}")
     public void deleteOrder(@Validated @PathVariable("customer_id") Integer customerId, @Validated @PathVariable("order_id") Integer orderId) {
