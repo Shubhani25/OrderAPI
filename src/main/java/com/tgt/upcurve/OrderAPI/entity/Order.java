@@ -1,6 +1,7 @@
 package com.tgt.upcurve.OrderAPI.entity;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +11,7 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "customer_orders")
 public class Order {
@@ -29,7 +31,7 @@ public class Order {
     private Integer orderId;
 
     @Column(name="store_id")
-    @JsonAlias("storeid")
+    @JsonAlias("storeId")
     private Integer storeId;
 
     @Column(name="order_status")

@@ -55,8 +55,9 @@ public class OrderControllerTest {
         String fetchedResponse = responseFetch.getResponse().getContentAsString();
 
         //Order savedOrder = JsonUtility.readValue(savedResponse, Order.class);
-        OrderResponse savedOrder = JsonUtility.readValue(savedResponse, OrderResponse.class);
         //Order fetchedOrder = JsonUtility.readValue(fetchedResponse, Order.class);
+
+        OrderResponse savedOrder = JsonUtility.readValue(savedResponse, OrderResponse.class);
         OrderResponse fetchedOrder = JsonUtility.readValue(fetchedResponse, OrderResponse.class);
         Assertions.assertEquals(savedOrder.getOrderId(), fetchedOrder.getOrderId());
         Assertions.assertEquals(savedOrder.getCustomerId(), fetchedOrder.getCustomerId());
@@ -79,6 +80,7 @@ public class OrderControllerTest {
                 .andExpect(status().is2xxSuccessful())
                 .andReturn();
         String fetchedResponse = responseFetch.getResponse().getContentAsString();
+
         //Order savedOrder = JsonUtility.readValue(savedResponse, Order.class);
         //List<Order> fetchedOrder =JsonUtility.readValue(fetchedResponse, new TypeReference<List<Order>>() {
         //});
@@ -109,7 +111,9 @@ public class OrderControllerTest {
                 .andExpect(status().is2xxSuccessful())
                 .andReturn();
         String fetchedResponse = responseFetch.getResponse().getContentAsString();
+
         //Order fetchedOrder = JsonUtility.readValue(fetchedResponse, Order.class);
+
         OrderResponse fetchedOrder = JsonUtility.readValue(fetchedResponse, OrderResponse.class);
         assert fetchedOrder != null;
 
